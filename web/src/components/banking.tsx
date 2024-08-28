@@ -9,6 +9,7 @@ import HomePanel from './pages/HomePanel';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Accounts from "./pages/accounts";
 
 interface OverviewData {
   day: string;
@@ -43,6 +44,7 @@ const BankingComponent: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/accounts" element={<Accounts />} />
 
           </Routes>
         </Router>

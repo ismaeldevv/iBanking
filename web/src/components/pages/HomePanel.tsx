@@ -18,7 +18,7 @@ const HomePanel: React.FC = () => {
   return (
     <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-background relative flex min-w-lg max-w-xs flex-col gap-2 rounded-[0.5rem] p-2 animation-fadeIn">
-        <div className="bg-card flex flex-col gap-4 rounded-lg p-4 shadow animation-fadeInDelay">
+        <div className="bg-card flex flex-col gap-4 rounded-[0.5rem] p-4 shadow animation-fadeInDelay">
           <div className="text-foreground flex items-center justify-between">
             <h2 className="font-bold">Welcome!</h2>
             <CgHello />

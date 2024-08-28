@@ -43,7 +43,7 @@ const Login: React.FC = () => {
   return (
     <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-background relative flex min-w-xs max-w-sm flex-col gap-2 rounded-[0.5rem] p-2 animation-fadeIn">
-        <div className="bg-card flex flex-col gap-4 rounded-lg p-4 shadow">
+        <div className="bg-card flex flex-col gap-4 rounded-[0.5rem] p-4 shadow">
           <h2 className="text-foreground font-bold text-xl text-center">Enter PIN</h2>
           <div className="text-muted-foreground flex items-center text-sm text-center">
             <h2 className="font-[400]">

@@ -7,7 +7,7 @@ import { fetchNui } from '../../utils/fetchNui';
 const NavBar: React.FC = () => {
 
     return (
-        <nav className="flex shrink-0 flex-col items-center justify-between rounded-bl-lg rounded-tl-lg bg-card p-2">
+        <nav className="flex shrink-0 flex-col items-center justify-between rounded-bl-[0.5rem] rounded-tl-[0.5rem] bg-card p-2">
             <div className="flex flex-col items-center justify-center">
                 <NavLink icon={LayoutDashboard} label={'Dashboard'} path="/dashboard" />
                 <NavLink icon={CreditCard} label={'Accounts'} path="/accounts" />
