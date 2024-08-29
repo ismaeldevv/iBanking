@@ -178,7 +178,7 @@ const Dashboard: React.FC = () => {
                   amount={transaction.amount}
                   message={transaction.message}
                   date={transaction.date}
-                  type={transaction.type}
+                  type={transaction.type as 'inbound' | 'outbound'}
                 />
               ))}
             </div>
@@ -191,7 +191,6 @@ const Dashboard: React.FC = () => {
             <div className="flex flex-col gap-4 pr-4 overflow-y-scroll max-h-[90px]">
               {data.invoices?.map((invoice) => (
                 <InvoiceItem
-                  // Potentially duplicate key, need to convert date to timestamp
                   key={`${invoice.issuer}-${invoice.date}`}
                   amount={invoice.amount}
                   date={invoice.date}
