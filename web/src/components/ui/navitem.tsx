@@ -19,7 +19,7 @@ const NavItem: React.FC<Props> = (props) => {
         <Button
           size="icon"
           variant={props.active ? 'default' : 'ghost'}
-          className={cn('h-[50px] w-[50px] rounded-[0.3rem]', !props.active && 'hover:bg-secondary', props.active && 'hover:bg-secondary')}
+          className={cn('h-[50px] w-[50px] rounded-', !props.active && 'hover:bg-secondary', props.active && 'hover:bg-secondary')}
           onClick={() => props.onClick()}
         >
           <props.icon color={props.exit ? 'hsl(var(--primary))' : undefined} />

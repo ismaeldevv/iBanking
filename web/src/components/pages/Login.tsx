@@ -62,20 +62,20 @@ const Login: React.FC = () => {
               <button
                 key={index}
                 onClick={() => handleButtonClick(num)}
-                className="bg-secondary text-secondary-foreground rounded-md p-4 text-xl font-bold transition-all hover:brightness-90 active:bg-[#5c3131]"
+                className="bg-secondary text-secondary-foreground rounded- p-4 text-xl font-bold transition-all hover:brightness-90 active:bg-[#5c3131]"
               >
                 {num}
               </button>
             ))}
             <button
               onClick={handleClear}
-              className="bg-secondary text-secondary-foreground rounded-md p-4 text-xl font-bold transition-all hover:brightness-90 active:bg-[#5c3131] col-span-2"
+              className="bg-secondary text-secondary-foreground rounded- p-4 text-xl font-bold transition-all hover:brightness-90 active:bg-[#5c3131] col-span-2"
             >
               C
             </button>
             <button
               onClick={() => handleButtonClick(buttons[9])}
-              className="bg-secondary text-secondary-foreground rounded-md p-4 text-xl font-bold transition-all hover:brightness-90 active:bg-[#5c3131]"
+              className="bg-secondary text-secondary-foreground rounded- p-4 text-xl font-bold transition-all hover:brightness-90 active:bg-[#5c3131]"
             >
               {buttons[9]}
             </button>

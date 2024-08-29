@@ -17,15 +17,17 @@ import {
   MoveRight,
   Share,
   Pen,
-  Delete,
   Trash
 } from "lucide-react";
 import { formatNumberWithSpaces } from "../../utils/formatCardNumber";
 
+import DepositWithdrawModal from '../popup/DepositWithdrawModal'
+import TransferAccountModal from '../popup/TransferAccountModal'
+
 const Accounts: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [activePage, setActivePage] = useState<number | null>(null);
-  const [activeItem, setActiveItem] = useState<any>(null); // Ajout de l'état pour activeItem
+  const [activeItem, setActiveItem] = useState<any>(null);
 
   const items = [
     {
@@ -113,6 +115,24 @@ const Accounts: React.FC = () => {
     }
   }, [activePage]);
 
+  const [DepositWithdrawData, SetDepositWithdrawData] = useState<any>(null);
+  const [isDepositWithdraw, SetDepositWithdraw] = useState<boolean>(false);
+  const [isTransferAccount, SetTransferAccount] = useState<boolean>(false);
+
+  const handleDepositWithdraw = (type: 'withdraw' | 'deposit' | 'close', value?: number) => {
+    if (type === 'close') return SetDepositWithdraw(false);
+
+    console.log(`FETCH ${type} / ${value}`);
+    return SetDepositWithdraw(false)
+  }
+
+  const handleTransfer = (type: 'transfer' | 'close', id?: number , value?: number) => {
+    if (type === 'close') return SetTransferAccount(false);
+
+    console.log(`FETCH ${type} / ${id} / ${value}`);
+    return SetTransferAccount(false)
+  }
+
   return (
     <div className="bg-background relative flex h-[768px] w-[1280px] rounded-[0.5rem]">
       <Navbar />
@@ -125,7 +145,6 @@ const Accounts: React.FC = () => {
               <CreditCard />
             </div>
 
-            {/* Section des items avec pagination */}
             <div className="relative flex flex-col items-center w-full">
               <div className="flex items-center w-full">
                 <button
@@ -178,7 +197,6 @@ const Accounts: React.FC = () => {
                 </button>
               </div>
 
-              {/* Dots pour les pages */}
               <div className="mt-1 flex gap-2">
                 {Array.from({ length: totalPages }).map((_, index) => (
                   <button
@@ -244,15 +262,27 @@ const Accounts: React.FC = () => {
                 </div>
               </div>
               <div className="flex h-full flex-col gap-2">
-                <button className="inline-flex whitespace-nowrap rounded-[0.35rem] text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-background border text-secondary-foreground shadow-sm transition-all hover:scale-[0.98] hover:cursor-pointer hover:bg-secondary h-fit w-full items-center justify-start gap-4 p-4">
+                <button onClick={() => {SetDepositWithdrawData({
+                  type: "withdraw",
+                  label: "Withdraw",
+                  balance: activeItem.balance
+                }); SetDepositWithdraw(true)}} className="inline-flex whitespace-nowrap rounded-[0.35rem] text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-background border text-secondary-foreground shadow-sm transition-all hover:scale-[0.98] hover:cursor-pointer hover:bg-secondary h-fit w-full items-center justify-start gap-4 p-4">
                   <Wallet />
                   Withdraw
                 </button>
-                <button className="inline-flex whitespace-nowrap rounded-[0.35rem] text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-background border text-secondary-foreground shadow-sm transition-all hover:scale-[0.98] hover:cursor-pointer hover:bg-secondary h-fit w-full items-center justify-start gap-4 p-4">
+                <button onClick={() => {SetDepositWithdrawData({
+                  type: "deposit",
+                  label: "Deposit",
+                  balance: activeItem.balance
+                }); SetDepositWithdraw(true)}} className="inline-flex whitespace-nowrap rounded-[0.35rem] text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-background border text-secondary-foreground shadow-sm transition-all hover:scale-[0.98] hover:cursor-pointer hover:bg-secondary h-fit w-full items-center justify-start gap-4 p-4">
                   <Landmark />
                   Deposit
                 </button>
-                <button className="inline-flex whitespace-nowrap rounded-[0.35rem] text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-background border text-secondary-foreground shadow-sm transition-all hover:scale-[0.98] hover:cursor-pointer hover:bg-secondary h-fit w-full items-center justify-start gap-4 p-4">
+                <button onClick={() => {SetDepositWithdrawData({
+                  type: "transfer",
+                  label: "Transfer",
+                  balance: activeItem.balance
+                }); SetTransferAccount(true)}} className="inline-flex whitespace-nowrap rounded-[0.35rem] text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-background border text-secondary-foreground shadow-sm transition-all hover:scale-[0.98] hover:cursor-pointer hover:bg-secondary h-fit w-full items-center justify-start gap-4 p-4">
                   <Move3D />
                   Transfer
                 </button>
@@ -298,8 +328,18 @@ const Accounts: React.FC = () => {
           </div>
         )}
       </div>
+
+      {isDepositWithdraw && (
+        <DepositWithdrawModal type={DepositWithdrawData.type} label={DepositWithdrawData.label} balance={DepositWithdrawData.balance} onClick={(type, value) => handleDepositWithdraw(type, value)}/>
+      )}
+
+      {isTransferAccount && (
+        <TransferAccountModal type={DepositWithdrawData.type} label={DepositWithdrawData.label} balance={DepositWithdrawData.balance} onClickTransfer={(type, id, value) => handleTransfer(type, id, value)} />
+      )}
     </div>
   );
 };
+
+{/** pushing */}
 
 export default Accounts;
