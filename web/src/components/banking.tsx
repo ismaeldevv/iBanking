@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Accounts from "./pages/accounts";
+import Invoices from "./pages/Invoices";
 
 interface OverviewData {
   day: string;
@@ -19,7 +20,6 @@ interface OverviewData {
 
 const BankingComponent: React.FC = () => {
   const [visible, setVisible] = useState(isEnvBrowser());
-  const [visibleCat, setVisibleCat] = useState<string>("");
   useNuiEvent<boolean>("setVisible", setVisible);
   useExitListener(setVisible);
 
@@ -45,6 +45,7 @@ const BankingComponent: React.FC = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/accounts" element={<Accounts />} />
+            <Route path="/accounts/invoices/:accountId" element={<Invoices />} />
 
           </Routes>
         </Router>
