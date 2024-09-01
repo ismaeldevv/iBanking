@@ -1,14 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 import App from './App';
 import './index.scss';
 import { isEnvBrowser } from './utils/misc';
-import { store } from './store';
 import { TooltipProvider } from './components/ui/tooltip';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = document.getElementById('root');
-
 if (isEnvBrowser()) {
   // https://i.imgur.com/iPTAdYV.png - Night time img
   root!.style.backgroundImage = 'url("https://i.imgur.com/3pzRj9n.png")';
@@ -17,12 +15,22 @@ if (isEnvBrowser()) {
   root!.style.backgroundPosition = 'center';
 }
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: true,
+    },
+  },
+});
+
 createRoot(root!).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
       <TooltipProvider disableHoverableContent delayDuration={0}>
         <App />
       </TooltipProvider>
-    </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
